@@ -1,4 +1,3 @@
-import org.example.Calculator;
 import org.example.OutputMethodes;
 import org.junit.Test;
 
@@ -58,90 +57,6 @@ public class testOutputMethodes {
         String expectedOutput = """
                 please enter your second Number:
                 """;
-        assertEquals(expectedOutput.trim(), outputStream.toString().trim());
-    }
-
-    @Test
-    public void testPrintAddition() {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-        Calculator calculator = new Calculator();
-
-        OutputMethodes outputMethodes = new OutputMethodes();
-        double num1 = 2;
-        double num2 = 3;
-        double result = calculator.addition(num1, num2);
-
-        outputMethodes.printAddition(num1, num2, result);
-
-        System.setOut(System.out);
-        String expectedOutput = String.format("""
-                Your Calculation:
-                %s + %s = %s
-                %n""", num1, num2, result);
-        assertEquals(expectedOutput.trim(), outputStream.toString().trim());
-    }
-
-    @Test
-    public void testPrintSubtraction() {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-        Calculator calculator = new Calculator();
-
-        OutputMethodes outputMethodes = new OutputMethodes();
-        double num1 = 2;
-        double num2 = 3;
-        double result = calculator.subtraction(num1, num2);
-
-        outputMethodes.printSubtraction(num1, num2, result);
-
-        System.setOut(System.out);
-        String expectedOutput = String.format("""
-                Your Calculation:
-                %s - %s = %s
-                %n""", num1, num2, result);
-        assertEquals(expectedOutput.trim(), outputStream.toString().trim());
-    }
-
-    @Test
-    public void testPrintMultiplication() {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-        Calculator calculator = new Calculator();
-
-        OutputMethodes outputMethodes = new OutputMethodes();
-        double num1 = 2;
-        double num2 = 3;
-        double result = calculator.multiplication(num1, num2);
-
-        outputMethodes.printMultiplication(num1, num2, result);
-
-        System.setOut(System.out);
-        String expectedOutput = String.format("""
-                Your Calculation:
-                %s * %s = %s
-                %n""", num1, num2, result);
-        assertEquals(expectedOutput.trim(), outputStream.toString().trim());
-    }
-
-    @Test
-    public void testDivision() {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-        Calculator calculator = new Calculator();
-
-        OutputMethodes outputMethodes = new OutputMethodes();
-        double num1 = 2;
-        double num2 = 3;
-        double result = calculator.division(num1, num2);
-
-        outputMethodes.printDivision(num1, num2, result);
-
-        System.setOut(System.out);
-        String expectedOutput = String.format("""
-                Your Calculation:
-                %s - %s = %s
-                %n""", num1, num2, result);
         assertEquals(expectedOutput.trim(), outputStream.toString().trim());
     }
 }

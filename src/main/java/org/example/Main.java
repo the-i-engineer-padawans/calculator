@@ -1,6 +1,5 @@
 package org.example;
 
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
@@ -15,48 +14,68 @@ public class Main {
         double num1 = 0;
         double num2 = 0;
         double result = 0;
-        String function;
+        String function = null;
+        int calculation = 0;
+
         String keepResultInput;
         Calculator calculator = new Calculator();
         OutputMethodes outputMethodes = new OutputMethodes();
 
         while (true) {
-            outputMethodes.printChooseFunction();
-            function = scanner.nextLine();
+            boolean wrongEntry = true;
+            while (wrongEntry) {
+                outputMethodes.printChooseFunction();
+                function = scanner.nextLine();
+                try {
+                    calculation = Integer.parseInt(function);
+                    if (calculation > 0 && calculation < 6) {
+                        wrongEntry = false;
+                    } else {
+                        outputMethodes.printOneToFive();
+                    }
+                } catch (NumberFormatException e) {
+                    outputMethodes.printOneToFive();
+                }
+            }
+
 
             if (num1 == 0) {
                 outputMethodes.printEnterNumber1();
                 num1 = Double.parseDouble(scanner.nextLine());
             }
-            if (!Objects.equals(function, "5")) {
+            if (calculation != 5) {
                 outputMethodes.printEnterNumber2();
                 num2 = Double.parseDouble(scanner.nextLine());
             }
 
-            switch (function) {
-                case "1" -> {
+            switch (calculation) {
+                case 1 -> {
                     result = calculator.addition(num1, num2);
                     outputMethodes.printCalculation(num1, ADDITION_OPERATOR, num2, result);
                 }
-                case "2" -> {
+                case 2 -> {
                     result = calculator.subtraction(num1, num2);
                     outputMethodes.printCalculation(num1, SUBTRACTION_OPERATOR, num2, result);
                 }
-                case "3" -> {
+                case 3 -> {
                     result = calculator.multiplication(num1, num2);
                     outputMethodes.printCalculation(num1, MULTIPLICATION_OPERATOR, num2, result);
                 }
-                case "4" -> {
+                case 4 -> {
                     result = calculator.division(num1, num2);
                     outputMethodes.printCalculation(num1, DIVISION_OPERATOR, num2, result);
                 }
-                case "5" -> {
-                    if (num1 < 0) {
+                case 5 -> {
+                    while (num1 < 0) {
                         outputMethodes.printPositivValue();
-                    } else {
-                        result = calculator.root(num1);
-                        outputMethodes.printRoot(num1, result);
+
+                        outputMethodes.printEnterNumber1();
+                        num1 = Double.parseDouble(scanner.nextLine());
                     }
+
+                    result = calculator.root(num1);
+                    outputMethodes.printRoot(num1, result);
+
                 }
                 default -> throw new IllegalStateException("Wrong value: " + function);
             }

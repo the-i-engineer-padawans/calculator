@@ -55,4 +55,10 @@ public class OutputMethodes {
                 please enter a positiv number for the root calculation
                 """);
     }
+
+    public void printOneToFive() {
+        System.out.println("""
+                please enter a number between 1 and 5
+                """);
+    }
 }
