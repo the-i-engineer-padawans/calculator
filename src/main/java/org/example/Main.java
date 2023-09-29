@@ -1,8 +1,15 @@
 package org.example;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
+
+    public static final String ADDITION_OPERATOR = "+";
+    public static final String SUBTRACTION_OPERATOR = "-";
+    public static final String MULTIPLICATION_OPERATOR = "*";
+    public static final String DIVISION_OPERATOR = "/";
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         double num1 = 0;
@@ -21,29 +28,35 @@ public class Main {
                 outputMethodes.printEnterNumber1();
                 num1 = Double.parseDouble(scanner.nextLine());
             }
-            outputMethodes.printEnterNumber2();
-            num2 = Double.parseDouble(scanner.nextLine());
+            if (!Objects.equals(function, "5")) {
+                outputMethodes.printEnterNumber2();
+                num2 = Double.parseDouble(scanner.nextLine());
+            }
 
             switch (function) {
                 case "1" -> {
                     result = calculator.addition(num1, num2);
-                    outputMethodes.printAddition(num1, num2, result);
+                    outputMethodes.printCalculation(num1, ADDITION_OPERATOR, num2, result);
                 }
                 case "2" -> {
                     result = calculator.subtraction(num1, num2);
-                    outputMethodes.printSubtraction(num1, num2, result);
+                    outputMethodes.printCalculation(num1, SUBTRACTION_OPERATOR, num2, result);
                 }
                 case "3" -> {
                     result = calculator.multiplication(num1, num2);
-                    outputMethodes.printMultiplication(num1, num2, result);
+                    outputMethodes.printCalculation(num1, MULTIPLICATION_OPERATOR, num2, result);
                 }
                 case "4" -> {
                     result = calculator.division(num1, num2);
-                    outputMethodes.printDivision(num1, num2, result);
+                    outputMethodes.printCalculation(num1, DIVISION_OPERATOR, num2, result);
                 }
                 case "5" -> {
-                    result = calculator.root(num1);
-                    outputMethodes.printAddition(num1, num2, result);
+                    if (num1 < 0) {
+                        outputMethodes.printPositivValue();
+                    } else {
+                        result = calculator.root(num1);
+                        outputMethodes.printRoot(num1, result);
+                    }
                 }
                 default -> throw new IllegalStateException("Wrong value: " + function);
             }
@@ -52,14 +65,11 @@ public class Main {
             keepResultInput = scanner.nextLine();
             if (keepResultInput.equals("1")) {
                 num1 = result;
-                num2 = 0;
             } else if (keepResultInput.equals("2")) {
                 num1 = 0;
-                num2 = 0;
             } else {
                 throw new IllegalStateException("Wrong value: " + keepResultInput);
             }
-            result = 0.0;
         }
     }
 }
